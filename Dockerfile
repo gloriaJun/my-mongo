@@ -15,7 +15,7 @@ RUN apt-get install -y mongodb-org
 VOLUME ["/data/db"]
 
 # excute mongodb
-CMD ["mongod"]
+#CMD ["mongod"]
 
 # expose ports
 #   - 27017: process
@@ -23,6 +23,7 @@ CMD ["mongod"]
 EXPOSE 27017
 EXPOSE 28017
 
-# mongodb 설치 후에 실행할 스크립트 파일을 이미지 내부로 복사
-#ADD set_mongodb.sh /tmp/set_mongodb.sh
-#RUN chmod +x /tmp/set_mongodb.sh
+# create db and user
+ADD create_db.sh /create_db.sh
+#RUN chmod +x /tmp/create_db.sh
+CMD ["sh", "/create_db.sh"]
