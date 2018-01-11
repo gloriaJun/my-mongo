@@ -9,7 +9,7 @@ MONGODB_APP_USERNAME=${MONGODB_APP_USERNAME:-"appadmin"}
 MONGODB_APP_PASSWORD=${MONGODB_APP_PASSWORD:-"passw0rd!"}
 
 # excute mongoDB
-$CMD &
+#$CMD &
 
 # Wait for MongoDB to boot
 RET=1
@@ -18,6 +18,9 @@ while [ $RET -ne 0 ]; do
     sleep 5s
     mongo admin --eval "help" >/dev/null 2>&1
     RET=$?
+    if [ $RET -ne 0 ]; then
+      $CMD &
+    fi
 done
 
 # create database

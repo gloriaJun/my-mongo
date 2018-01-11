@@ -1,5 +1,6 @@
 #### Installation mongodb with auth and create user database
-FROM ubuntu:16.04
+#FROM ubuntu:16.04
+FROM mongo:latest
 MAINTAINER gloriajun <pureainu@gmail.com>
 
 # Import the public key used by the package management system
@@ -15,13 +16,11 @@ RUN apt-get install -y mongodb-org
 # create database folder
 VOLUME ["/data/db"]
 
-# create db and user
-ADD create_db.sh /create_db.sh
-#RUN chmod +x /create_db.sh
-RUN sh /create_db.sh
-
 # excute mongodb
 CMD ["mongod"]
+
+# move script file for create db and user
+ADD create_db.sh /create_db.sh
 
 # expose ports
 #   - 27017: process

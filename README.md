@@ -25,13 +25,17 @@ docker run -d \
 --name mongodb gloriajun/my-mongo
 ```
 
-* application database setting
+#### application database setting
+###### default database setting
 ```
-docker run -d \
+docker exec mongodb sh /create_db.sh
+```
+
+###### customize database setting
+```
+docker exec \
 -e MONGODB_APP_DBNAME=mytestdb \
 -e MONGODB_APP_USERNAME=tester \
 -e MONGODB_APP_PASSWORD=passw0rd \
--v /Volumes/data/docker/db/mongodb/:/data/db \
--p 27017:27017 \
---name mongodb gloriajun/my-mongo
+mongodb sh /create_db.sh
 ```
